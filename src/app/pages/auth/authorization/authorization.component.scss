@@ -1,0 +1,51 @@
+.authorization_page {
+  width: 400px;
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+  padding: 2rem;
+  background-color: #fff2eb;
+  border-radius: 20px;
+  margin-top: 2rem;
+}
+
+span, input {
+  display: block;
+}
+
+span {
+  color: gray;
+}
+
+.authorization_page h3 {
+  text-align: center;
+  font-weight: bold;
+  color: #b9ad9d;
+}
+
+.btn_auth {
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: none;
+  background-color: #ffbd7d;
+  color: white;
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+}
+
+
+.auth_el, {
+  right: 0;
+  left: 0;
+  width: 210px;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.btn-wrapper {
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+  width: 9.5rem;
+}

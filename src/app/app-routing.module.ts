@@ -1,10 +1,31 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {AuthorizationComponent} from "./pages/auth/authorization/authorization.component";
+import {RegistrationComponent} from "./pages/auth/registration/registration.component";
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: 'culinary',
+    loadChildren: () => import('./pages/culinary/culinary.module').then(m => m.CulinaryModule)
+  },
+  {
+    path: 'authorization',
+    component: AuthorizationComponent
+  },
+  {
+    path: 'registration',
+    component: RegistrationComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'culinary'
+  }
+];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -1,0 +1,24 @@
+<div class="authorization_page">
+  <h3>Авторизация</h3>
+  <div class="auth_el">
+    <span>Login</span>
+    <input type="text"
+           class="mt-1"
+           pInputText
+           [ngClass]="{'input-error': !login}"
+           [(ngModel)]="login"/>
+  </div>
+  <div class="auth_el">
+    <span>Password</span>
+    <input type="password"
+           pInputText
+           [(ngModel)]="psw"
+           [ngClass]="{'input-error': !psw}"/>
+  </div>
+  <div class="mt-4 btn-wrapper">
+    <button type="button" class="btn_auth" (click)="onAuth($event)">
+      {{authTextButton}}
+    </button>
+  </div>
+</div>
+

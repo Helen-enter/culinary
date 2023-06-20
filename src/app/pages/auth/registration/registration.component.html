@@ -1,0 +1,41 @@
+<div class="registration_page">
+  <h3>Регистрация</h3>
+  <div class="auth_el">
+    <span>Login</span>
+    <input type="text"
+           pInputText
+           [(ngModel)]="login"
+           [ngClass]="{'input-error': !login}"/>
+  </div>
+  <div class="auth_el">
+    <span>Password</span>
+    <input type="password"
+           class="mt-1"
+           pInputText
+           [ngClass]="{'input-error': !psw}"
+           [(ngModel)]="psw"/>
+  </div>
+  <div class="auth_el">
+    <span>Password repeat</span>
+    <input type="password"
+           class="mt-1"
+           pInputText
+           [ngClass]="{'input-error': !pswRepeat}"
+           [(ngModel)]="pswRepeat"/>
+  </div>
+  <div class="auth_el">
+    <span>Email</span>
+    <input type="text"
+           class="mt-1"
+           pInputText
+           [(ngModel)]="email"/>
+  </div>
+  <div class="btn-wrapper">
+    <button [disabled]="!psw || !login || !pswRepeat" type="button" class="mt-5 btn_auth"
+            (click)="registration($event)">
+      Регистрация
+    </button>
+  </div>
+</div>
+
+
