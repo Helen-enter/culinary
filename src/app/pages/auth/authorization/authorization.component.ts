@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import { MessageService } from 'primeng/api';
 import {IUser} from 'src/app/models/user';
 import {UserService} from 'src/app/services/user/user.service';
+import {UserRestService} from "../../../services/rest/user-rest.service";
 
 
 @Component({
@@ -21,7 +22,8 @@ export class AuthorizationComponent {
     private messageService: MessageService,
     private router: Router,
     private userService: UserService,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private userRestService: UserRestService) {
 
   }
 
@@ -39,6 +41,7 @@ export class AuthorizationComponent {
       login: this.login,
     }
 
+
     this.http.post<{ access_token: string, id: string }>('http://localhost:3000/users/' + authUser.login, authUser).subscribe((data) => {
       console.log('token', data.access_token)
       authUser.id = data.id
@@ -47,6 +50,13 @@ export class AuthorizationComponent {
       //const token = 'user-private-token'
       this.userService.setToken(token);
       this.userService.setToStore(token);
+
+
+      const userId = this.userService.getUser().id
+      console.log("userId", userId)
+      //this.router.navigate([`user/${userId}`]);
+      this.router.navigate([`user/${userId}`]);
+
 
     }, (err: HttpErrorResponse) => {
       const serverError = err.error

@@ -1,15 +1,14 @@
 <nav class="navbar bg-body-tertiary">
   <div class="container-fluid container_nav">
     <a class="navbar-brand">Кулинар.ru</a>
-    <a class="nav-link nav_auth">Блог</a>
-    <a class="nav-link nav_auth">Мероприятия</a>
     <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+      <input class="form-control me-2" type="search" placeholder="Поиск по рецептам" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Поиск</button>
     </form>
     <div class="mb-2 mb-lg-0 d-flex">
-      <a class="nav-link nav_auth" routerLink="/authorization">Авторизация</a>
-      <a class="nav-link nav_auth" routerLink="/registration">Регистрация</a>
+      <a class="nav-link nav_auth" routerLink="/user/{{login}}">{{login}}</a>
+      <a class="nav-link nav_auth" routerLink="/authorization" *ngIf="!login">Авторизация</a>
+      <a class="nav-link nav_auth" routerLink="/registration" *ngIf="!login">Регистрация</a>
     </div>
   </div>
 </nav>

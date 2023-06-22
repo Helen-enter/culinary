@@ -1,0 +1,43 @@
+<div>
+  <p>Ваш вес:</p><input pInputText type="number" [(ngModel)]="weight"/>
+  <p>Ваш рост:</p><input pInputText type="number" [(ngModel)]="height"/>
+  <p>Ваш возраст:</p><input pInputText type="number" [(ngModel)]="age"/>
+  <p>Какой образ жизни вы ведете:</p>
+  <div>
+    <div class="d-flex">
+      <p-checkbox></p-checkbox>
+      <p class="description-el">Сидячий образ жизни (офисная работа)</p>
+    </div>
+    <div class="d-flex">
+      <p-checkbox [(ngModel)]="isChecked" (onChange)="onChangeCheckbox($event)"></p-checkbox>
+      <p class="description-el">Средняя активность (легкие упражнения 1-3 раза в неделю или активная работа, например,
+        официант)</p>
+    </div>
+    <div class="d-flex">
+      <p-checkbox></p-checkbox>
+      <p class="description-el">Высокая активность (интенсивные занятия 3-5 раз в неделю)</p>
+    </div>
+    <div class="d-flex">
+      <p-checkbox></p-checkbox>
+      <p class="description-el">Очень высокая активность (тяжелые физические нагрузки 6-7 раз в неделю)</p>
+    </div>
+  </div>
+  <div>
+    <p>Ваша цель:</p>
+    <div class="d-flex">
+      <p-checkbox>+</p-checkbox>
+      <p class="description-el">Хочу похудеть</p>
+    </div>
+    <div class="d-flex">
+      <p-checkbox>+</p-checkbox>
+      <p class="description-el">Не хочу ничего менять</p>
+    </div>
+    <div class="d-flex">
+      <p-checkbox>+</p-checkbox>
+      <p class="description-el">Хочу набрать вес</p>
+    </div>
+  </div>
+  <div>
+    <button class="btn btn-success">Рассчитать</button>
+  </div>
+</div>

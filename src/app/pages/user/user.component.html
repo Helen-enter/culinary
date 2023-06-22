@@ -1,0 +1,32 @@
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid container_nav header_nav">
+    <a class="navbar-brand" routerLink="/culinary">Кулинар.ru</a>
+    <div class="mb-2 mb-lg-0 d-flex">
+      <a class="nav-link nav_auth" routerLink="/culinary" (click)="goOut()">Выйти</a>
+    </div>
+  </div>
+</nav>
+<div class="user_page">
+  <div class="user_name">
+    <h3>Личный кабинет</h3>
+    <p>Добро пожаловать: {{userName}} !</p>
+  </div>
+  <div>
+    <div class="user_list">
+
+      <p-tabView>
+
+        <p-tabPanel header="Мой КБЖУ">
+          <ng-template pTemplate="content">
+            <app-calories></app-calories>
+          </ng-template>
+        </p-tabPanel>
+        <p-tabPanel header="Моя кулинарная книга">
+          <app-book-recipes></app-book-recipes>
+        </p-tabPanel>
+      </p-tabView>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="d-flex book-recipes__page">
+  <div class="book-recipes__block">
+    <h6>Мои рецепты</h6>
+    <button class="btn-success btn" (click)="showRecipes()">{{isShowRecipes? 'Скрыть' : 'Показать'}}</button>
+    <div *ngIf="isShowRecipes">
+      <p>У вас в книге {{recipes.length}} рецепт(a/ов)</p>
+      <p>Ваши рецепты:</p>
+      <div  *ngFor="let recipe of recipes">
+        <p>{{recipe.title}}</p>
+        <img class="recipe_img" src="http://localhost:3000/public/{{recipe.img}}">
+        <div>
+          <button class="btn-success btn" (click)="isReadRecipe = !isReadRecipe">{{isReadRecipe? 'Скрыть рецепт' : 'Показать рецепт'}}</button>
+          <p *ngIf="isReadRecipe">{{recipe.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="book-recipes__block">
+    <div class="title-recipe">
+      <h6>Добавить рецепт</h6>
+      <button class="btn-success btn" (click)="showAddRecipes()">{{isShowAddRecipes? '-' : '+'}}</button>
+    </div>
+    <div *ngIf="isShowAddRecipes">
+      <div class="mt-4" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+        <div class="mt-3">
+          <div class="mt-3">
+            <span class="mx-3">Категория</span>
+            <select class="form-select" aria-label="Default select example" formControlName="category">
+              <option selected disabled>Выберите категорию</option>
+              <option [value]="item"  *ngFor="let item of selectedCategory; let i = index">{{item}}</option>
+            </select>
+          </div>
+
+          <span class="mx-3">Название</span>
+          <input type="text"
+                 pInputText
+                 class="mt-3"
+                 formControlName="title"
+          />
+        </div>
+
+        <div class="mt-3">
+          <span class="mx-3">Описание</span>
+          <textarea pInputTextarea formControlName="description"></textarea>
+        </div>
+        <div class="mt-3">
+          <span class="mx-3">Фотография</span>
+          <input type="file"
+                 value="file"
+                 pInputText
+                 class="mt-3"
+                 (change)="selectFile($event)"
+                 formControlName="img"
+          />
+        </div>
+        <div class="mt-4">
+          <button class="btn-success btn" type="submit"
+                  (click)="addRecipe()"
+                  [disabled]="!recipeForm.valid">Добавить рецепт
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

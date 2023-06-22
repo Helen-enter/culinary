@@ -3,4 +3,9 @@ export interface IUser {
   psw: string,
   email?: string
   id?: string
+
+  calories?: string
+  proteins?: string
+  fats?: string
+  carbohydrates?: string
 }
