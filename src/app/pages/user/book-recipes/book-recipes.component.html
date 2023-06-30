@@ -1,67 +1,101 @@
 <div class="d-flex book-recipes__page">
   <div class="book-recipes__block">
-    <h6>Мои рецепты</h6>
-    <button class="btn-success btn" (click)="showRecipes()">{{isShowRecipes? 'Скрыть' : 'Показать'}}</button>
+    <div class="d-flex">
+      <div class="recipe_title">
+        <h6>Мои рецепты</h6>
+        <button class="btn btn-outline-warning"
+                (click)="showRecipes()">{{isShowRecipes ? 'Скрыть' : 'Показать'}}</button>
+      </div>
+
+
+      <div class="recipe_title">
+        <h6>Добавить рецепт</h6>
+        <button class="btn btn-outline-warning" (click)="showAddRecipes()">{{isShowAddRecipes ? '-' : '+'}}</button>
+      </div>
+    </div>
+
+
     <div *ngIf="isShowRecipes">
       <p>У вас в книге {{recipes.length}} рецепт(a/ов)</p>
       <p>Ваши рецепты:</p>
-      <div  *ngFor="let recipe of recipes">
-        <p>{{recipe.title}}</p>
-        <img class="recipe_img" src="http://localhost:3000/public/{{recipe.img}}">
-        <div>
-          <button class="btn-success btn" (click)="isReadRecipe = !isReadRecipe">{{isReadRecipe? 'Скрыть рецепт' : 'Показать рецепт'}}</button>
-          <p *ngIf="isReadRecipe">{{recipe.description}}</p>
+      <div class="d-flex">
+        <div *ngFor="let recipe of recipes">
+
+          <div class="card recipes__card " style="width: 20rem;">
+
+            <div class="card-body card-block">
+              <button class="btn-outline-warning btn close_button" (click)="removeRecipe(recipe._id)">x</button>
+              <h5 class="card-title">{{recipe.title}}</h5>
+            </div>
+            <img src="http://localhost:3000/public/{{recipe.img}}" class="card-img-top" alt="...">
+            <div class="d-flex justify-content-between p-lg-2">
+              <div>
+                <button class="btn-outline-warning btn"
+                        (click)="isReadRecipe = !isReadRecipe">{{isReadRecipe ? 'Скрыть рецепт' : 'Показать рецепт'}}</button>
+                <div *ngIf="isReadRecipe">
+                  <p>{{recipe.description}}</p>
+                  <button class="btn-outline-warning btn" (click)="updateRecipe(recipe)">Изменить рецепт</button>
+                </div>
+              </div>
+              <div>
+                <button class="btn" [disabled]="isShareRecipe"
+                        (click)="shareRecipe(recipe)">
+                  <img src="assets/img/free-icon-font-share-square-9841254.png">
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="book-recipes__block">
-    <div class="title-recipe">
-      <h6>Добавить рецепт</h6>
-      <button class="btn-success btn" (click)="showAddRecipes()">{{isShowAddRecipes? '-' : '+'}}</button>
-    </div>
-    <div *ngIf="isShowAddRecipes">
-      <div class="mt-4" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-        <div class="mt-3">
-          <div class="mt-3">
-            <span class="mx-3">Категория</span>
-            <select class="form-select" aria-label="Default select example" formControlName="category">
-              <option selected disabled>Выберите категорию</option>
-              <option [value]="item"  *ngFor="let item of selectedCategory; let i = index">{{item}}</option>
-            </select>
-          </div>
+</div>
 
-          <span class="mx-3">Название</span>
-          <input type="text"
-                 pInputText
-                 class="mt-3"
-                 formControlName="title"
-          />
-        </div>
 
-        <div class="mt-3">
-          <span class="mx-3">Описание</span>
-          <textarea pInputTextarea formControlName="description"></textarea>
-        </div>
-        <div class="mt-3">
-          <span class="mx-3">Фотография</span>
+<div class="book-recipes__block">
+  <div *ngIf="isShowAddRecipes">
+    <div class="mt-4 form-recipe" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="mt-3 d-flex">
+        <span >Категория</span>
+        <select class="form-select form-recipe__el" aria-label="Default select example" formControlName="category">
+          <option selected disabled>Выберите категорию</option>
+          <option [value]="item" *ngFor="let item of selectedCategory; let i = index">{{item}}</option>
+        </select>
+      </div>
+      <div class="d-flex">
+        <span >Название</span>
+        <input type="text"
+               pInputText
+               class="mt-3 form-recipe__el"
+               formControlName="title"
+        />
+      </div>
+
+
+      <div class="mt-3 d-flex">
+        <span >Описание</span>
+        <textarea pInputTextarea formControlName="description" class="form-recipe__el"></textarea>
+      </div>
+      <div class="mt-3 d-flex">
+        <span >Фотография</span>
+        <div class="custom-file-upload">
           <input type="file"
                  value="file"
                  pInputText
-                 class="mt-3"
+                 class="mt-3 file-input form-recipe__el"
                  (change)="selectFile($event)"
                  formControlName="img"
           />
-        </div>
-        <div class="mt-4">
-          <button class="btn-success btn" type="submit"
-                  (click)="addRecipe()"
-                  [disabled]="!recipeForm.valid">Добавить рецепт
-          </button>
+          <span>Загрузить файл {{fileName}}</span>
         </div>
       </div>
+      <div class="mt-4">
+        <button class="btn btn-outline-warning" type="submit"
+                (click)="addRecipe()"
+                [disabled]="!recipeForm.valid">Добавить рецепт
+        </button>
+      </div>
     </div>
-
   </div>
 </div>
 

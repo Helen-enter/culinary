@@ -1,10 +1,26 @@
+@font-face {
+  font-family: 'Comic';
+  src: url("../../../../assets/fonts/Comic_CAT.ttf");
+}
+
+.authorization {
+  background: url("../../../../assets/img/auth.jpg");
+  background-size: cover ;
+  //background: #ffcd4f;
+  position: absolute;
+  width: 100%;
+  height: 700px;
+  z-index: -2;
+}
+
 .authorization_page {
   width: 400px;
   margin: 0 auto;
+  box-shadow: 2px 2px 20px 6px rgb(146 140 132 / 20%);
   right: 0;
   left: 0;
   padding: 2rem;
-  background-color: #fff2eb;
+  background-color: #ffffff;
   border-radius: 20px;
   margin-top: 2rem;
 }
@@ -17,14 +33,19 @@ span, input {
   display: block;
 }
 
+.logo {
+  font-family: Comic;
+  font-size: 30px;
+  color: #ff7e00;
+}
+
 span {
   color: gray;
 }
 
 .authorization_page h3 {
   text-align: center;
-  font-weight: bold;
-  color: #b9ad9d;
+  color: #b2b2b2;
 }
 
 .btn_auth {

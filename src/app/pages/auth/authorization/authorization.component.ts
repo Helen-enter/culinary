@@ -44,10 +44,10 @@ export class AuthorizationComponent {
 
     this.http.post<{ access_token: string, id: string }>('http://localhost:3000/users/' + authUser.login, authUser).subscribe((data) => {
       console.log('token', data.access_token)
+      console.log(data, 'data user')
       authUser.id = data.id
       this.userService.setUser(authUser);
       const token: string = data.access_token;
-      //const token = 'user-private-token'
       this.userService.setToken(token);
       this.userService.setToStore(token);
 
@@ -59,9 +59,9 @@ export class AuthorizationComponent {
 
 
     }, (err: HttpErrorResponse) => {
-      const serverError = err.error
-      this.messageService.add({severity: 'warn', summary: serverError.errorText});
-      //this.messageService.add({severity: 'warn', summary: "Ошибка"});
+      // const serverError = err.error
+      // this.messageService.add({severity: 'warn', summary: serverError.errorText});
+      this.messageService.add({severity: 'warn', summary: "Ошибка"});
     });
 
   }

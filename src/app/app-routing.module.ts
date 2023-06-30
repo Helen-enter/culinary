@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthorizationComponent} from "./pages/auth/authorization/authorization.component";
 import {RegistrationComponent} from "./pages/auth/registration/registration.component";
-import {UserComponent} from "./pages/user/user.component";
 
 const routes: Routes = [
   {
@@ -22,9 +21,10 @@ const routes: Routes = [
     path: 'user/:id',
     loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)
   },
+  //
   // {
-  //   path: 'user/:id',
-  //   component: UserComponent
+  //   path: 'user',
+  //   loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)
   // },
   {
     path: '**',

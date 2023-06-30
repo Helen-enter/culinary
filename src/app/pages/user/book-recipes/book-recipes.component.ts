@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../../services/user/user.service";
 import {IRecipe} from "../../../models/recipe";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserRestService} from "../../../services/rest/user-rest.service";
+
 
 @Component({
   selector: 'app-book-recipes',
@@ -22,11 +22,20 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
   isShowRecipes = false
   isShowAddRecipes = false
   isReadRecipe = false
-  selectedCategory = ['супы', 'салаты', 'выпечка', 'закуски', 'дессерты', 'дессерты без сахара']
+  selectedCategory = ['супы', 'салаты', 'выпечка', 'закуски', 'десерты', 'десерты без сахара']
+
+  dataRecipe: IRecipe
+
+  recipeFromComponent: IRecipe
+
+  generalRecipe: Object
+
+  isShareRecipe = false
+
+  fileName: string
 
   constructor(private http: HttpClient,
-              private userService: UserService,
-              private userRestService: UserRestService) {
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -35,8 +44,8 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
       category: new FormControl(),
       title: new FormControl('', {validators: Validators.required}),
       description: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      img: new FormControl(),
-      userId: new FormControl(this.userService.getUser().id)
+      img: new FormControl('', {validators: Validators.required}),
+      userId: new FormControl(this.userService.getUser().id),
     })
   }
 
@@ -53,9 +62,8 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
         formParams.append(prop, recipeDataRow[prop])
       }
     }
-    // @ts-ignore
-    this.userRestService.createRecipe(formParams).subscribe((data) => {
-      console.log('data recipe', data)
+
+    this.http.post<IRecipe>('http://localhost:3000/recipes/', formParams, {headers: {}}).subscribe((data) => {
     })
   }
 
@@ -70,6 +78,7 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
     if (ev.target.files.length > 0) {
       const file = ev.target.files[0]
       console.log('file', file)
+      this.fileName = file.name
       this.recipeForm.patchValue({
         img: file
       })
@@ -79,8 +88,7 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
 
   showRecipes() {
     this.recipes = []
-    // @ts-ignore
-    this.http.get('http://localhost:3000/recipes').subscribe((data: IRecipe[]) => {
+    this.http.get<IRecipe[]>('http://localhost:3000/recipes').subscribe((data) => {
       console.log('data users', data)
       const userId = this.userService.getUser().id
       data.forEach((el) => {
@@ -96,8 +104,49 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
     this.isShowRecipes = !this.isShowRecipes
     this.isShowAddRecipes = false
   }
+
   showAddRecipes() {
     this.isShowAddRecipes = !this.isShowAddRecipes
     this.isShowRecipes = false
+  }
+
+  shareRecipe(recipe: IRecipe) {
+
+
+    this.recipeFromComponent = recipe
+    const recipeId = recipe._id
+    // const recipeObj: IRecipe = {
+    //   title: recipe.title,
+    //   description: recipe.description,
+    //   category: recipe.category,
+    //   recipeId: recipe._id,
+    //   userId: recipe.userId,
+    //   img: recipe.img,
+    //   _id: recipe._id
+    // }
+    // this.http.put<IRecipe>(`http://localhost:3000/recipes/${recipeId}`, recipeObj).subscribe((data) => {
+    //
+    // })
+
+    this.http.get<IRecipe>(`http://localhost:3000/recipes/${recipeId}`, {headers: {}}).subscribe((item) => {
+      console.log('вы хотите поделиться рецептом', item, item.recipeId)
+
+      this.http.post<IRecipe>(`http://localhost:3000/general-recipes/`, item).subscribe((data) => {
+      })
+    })
+  }
+
+  removeRecipe(recipeId: string) {
+
+    this.http.delete<IRecipe>(`http://localhost:3000/recipes/${recipeId}`).subscribe((data: IRecipe) => {
+      console.log('data', data)
+    })
+
+    this.recipes = this.recipes.filter((el) => el._id !== recipeId)
+
+  }
+
+  updateRecipe(recipe: IRecipe) {
+    console.log('вы хотите изменить рецепт:', recipe)
   }
 }

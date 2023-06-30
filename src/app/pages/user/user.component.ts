@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-user',
@@ -9,16 +10,18 @@ import {UserService} from "../../services/user/user.service";
 export class UserComponent implements OnInit {
   userName: string
 
+
   constructor(private userService: UserService) {
   }
 
   ngOnInit() {
     this.userName = this.userService.getUser().login
     console.log('userName', this.userName)
+
   }
 
-  goOut() {
+  goOut(){
     this.userService.getUser().login = ''
   }
-
 }
+

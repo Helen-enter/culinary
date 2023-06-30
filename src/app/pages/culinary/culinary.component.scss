@@ -1,7 +1,8 @@
 @font-face {
-  font-family: 'Comfortaa-Bold';
-  src: url("Comfortaa-VariableFont_wght.ttf");
+  font-family: 'Comic';
+  src: url("../../../assets/fonts/Comic_CAT.ttf");
 }
+
 
 .culinary_img img {
   width: 100%;
@@ -12,11 +13,11 @@
 .dish_link {
   list-style: none;
   padding: 8px 15px;
-  background-color: antiquewhite;
   border-radius: 20px;
   display: inline;
   margin: 10px;
   cursor: pointer;
+  font-family: Comic;
 }
 
 .dishes_nav {
@@ -33,15 +34,17 @@
 
 .main_text {
   position: absolute;
-  top: 10rem;
-  left: 8rem;
+
+  top: 15rem;
+  left: 12rem
 }
 
 .main_text p {
   font-size: 40px;
   color: white;
   font-weight: bold;
-  font-family: Comfortaa-Bold;
+  letter-spacing: 4px;
+  font-family: Comic;
 }
 
 .main_text button {
@@ -50,4 +53,15 @@
   background-color: antiquewhite;
   border-radius: 20px;
   cursor: pointer;
+}
+
+.general-recipes__block {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.general-recipes__card {
+  width: 30%;
+  padding: 10px;
 }

@@ -1,12 +1,18 @@
 <nav class="navbar bg-body-tertiary">
   <div class="container-fluid container_nav">
-    <a class="navbar-brand">Кулинар.ru</a>
+    <a class="navbar-brand logo">Кулинар.ru</a>
+<!--    <a class="nav-link nav_auth">Калькулятор калорий</a>-->
     <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Поиск по рецептам" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Поиск</button>
+      <input class="form-control me-2" type="search"
+             [ngModelOptions]="{standalone: true}"
+             [(ngModel)]="searchValue"
+             (input)="initSearchRecipes()"
+             placeholder="Поиск по рецептам" aria-label="Search">
+      <button class="btn btn-outline-warning" type="submit">Поиск</button>
     </form>
     <div class="mb-2 mb-lg-0 d-flex">
-      <a class="nav-link nav_auth" routerLink="/user/{{login}}">{{login}}</a>
+<!--      <a class="btn" *ngIf="login" routerLink="/user/{{id}}"><img src="assets/img/free-icon-chef-3461974.png" class="user"><b>{{login}}</b></a>-->
+      <a class="btn" *ngIf="login" (click)="clickLogo()"><img src="assets/img/free-icon-chef-3461974.png" class="user"><b>{{login}}</b></a>
       <a class="nav-link nav_auth" routerLink="/authorization" *ngIf="!login">Авторизация</a>
       <a class="nav-link nav_auth" routerLink="/registration" *ngIf="!login">Регистрация</a>
     </div>

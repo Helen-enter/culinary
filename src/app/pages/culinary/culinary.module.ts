@@ -9,6 +9,10 @@ import {AuthorizationComponent} from "../auth/authorization/authorization.compon
 import {RegistrationComponent} from "../auth/registration/registration.component";
 import { HeaderComponent } from './header/header.component';
 import {TabViewModule} from "primeng/tabview";
+import { CulinaryModalComponent } from './culinary-modal/culinary-modal.component';
+import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
+import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -17,6 +21,7 @@ import {TabViewModule} from "primeng/tabview";
     CulinaryComponent,
     AuthorizationComponent,
     RegistrationComponent,
+    CulinaryModalComponent,
   ],
   exports: [
     HeaderComponent
@@ -26,7 +31,11 @@ import {TabViewModule} from "primeng/tabview";
     CulinaryRoutingModule,
     FormsModule,
     InputTextModule,
-    TabViewModule
+    TabViewModule,
+    ToastModule,
+  ],
+  providers: [
+    MessageService
   ]
 })
 export class CulinaryModule { }

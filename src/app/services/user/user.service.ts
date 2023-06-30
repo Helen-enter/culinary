@@ -8,13 +8,12 @@ export class UserService {
   private user: IUser;
   private token: string
 
+
   constructor() { }
 
   getUser(): IUser {
     console.log('user', this.user)
     return this.user
-
-    // возвращается user
   };
 
 

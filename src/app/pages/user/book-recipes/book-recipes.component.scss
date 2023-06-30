@@ -10,7 +10,55 @@ add-recipe {
   width: 100%;
 }
 
-.book-recipes__block {
+.recipe_title {
+  width: 200px;
+}
+
+span {
+  width: 6.5rem;
+}
+
+.recipes__block {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recipes__card {
+  width: 30%;
+  padding: 10px;
+  margin: 15px;
+}
+
+.close_button {
+  position: absolute;
+  right: 1rem;
+}
+
+.custom-file-upload {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  width: 250px;
+  border-radius: 5px;
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.form-recipe {
   width: 50%;
 }
 
+.form-recipe__el {
+  width: 250px;
+}

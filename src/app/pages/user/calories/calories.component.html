@@ -1,43 +1,32 @@
-<div>
-  <p>Ваш вес:</p><input pInputText type="number" [(ngModel)]="weight"/>
-  <p>Ваш рост:</p><input pInputText type="number" [(ngModel)]="height"/>
-  <p>Ваш возраст:</p><input pInputText type="number" [(ngModel)]="age"/>
+<div [formGroup]="caloriesForm">
+  <!--  <p>Ваш вес:</p><input pInputText formControlName="weight" type="number" #myInput [(ngModel)]="weight" (input)="onInputChanged()"/>-->
+  <p>Ваш вес:</p><input pInputText formControlName="weight" type="number" [(ngModel)]="weight">
+  <p>Ваш рост:</p><input pInputText formControlName="height" type="number" [(ngModel)]="height"/>
+  <p>Ваш возраст:</p><input pInputText formControlName="age" type="number" [(ngModel)]="age"/>
   <p>Какой образ жизни вы ведете:</p>
-  <div>
-    <div class="d-flex">
-      <p-checkbox></p-checkbox>
-      <p class="description-el">Сидячий образ жизни (офисная работа)</p>
-    </div>
-    <div class="d-flex">
-      <p-checkbox [(ngModel)]="isChecked" (onChange)="onChangeCheckbox($event)"></p-checkbox>
-      <p class="description-el">Средняя активность (легкие упражнения 1-3 раза в неделю или активная работа, например,
-        официант)</p>
-    </div>
-    <div class="d-flex">
-      <p-checkbox></p-checkbox>
-      <p class="description-el">Высокая активность (интенсивные занятия 3-5 раз в неделю)</p>
-    </div>
-    <div class="d-flex">
-      <p-checkbox></p-checkbox>
-      <p class="description-el">Очень высокая активность (тяжелые физические нагрузки 6-7 раз в неделю)</p>
-    </div>
-  </div>
+  <select class="form-select" formControlName="categoryLife" aria-label="Default select example">
+    <option selected disabled>Выберите категорию</option>
+    <option [value]="item" *ngFor="let item of selectLifeStyle; let i = index">{{item}}</option>
+  </select>
   <div>
     <p>Ваша цель:</p>
-    <div class="d-flex">
-      <p-checkbox>+</p-checkbox>
-      <p class="description-el">Хочу похудеть</p>
-    </div>
-    <div class="d-flex">
-      <p-checkbox>+</p-checkbox>
-      <p class="description-el">Не хочу ничего менять</p>
-    </div>
-    <div class="d-flex">
-      <p-checkbox>+</p-checkbox>
-      <p class="description-el">Хочу набрать вес</p>
-    </div>
+    <select class="form-select" formControlName="categoryObjective" aria-label="Default select example">
+      <option selected disabled>Выберите категорию</option>
+      <option [value]="item" *ngFor="let item of selectObjective; let i = index">{{item}}</option>
+    </select>
+
   </div>
-  <div>
-    <button class="btn btn-success">Рассчитать</button>
-  </div>
+
+</div>
+
+<button class="btn btn-outline-warning" type="submit" (click)="countCalories()" [disabled]="!caloriesForm.valid">
+  Рассчитать
+</button>
+<div *ngIf="isShow">
+  <p>Ваша норма</p>
+  <p>{{normCalories}} калорий</p>
+  <p>ваша норма белков: {{proteins}}</p>
+  <p>ваша норма жиров: {{fats}}</p>
+  <p>ваша норма углеводов: {{carbohydrates}}</p>
+  <button class="btn btn-outline-warning">Сохранить результат</button>
 </div>
