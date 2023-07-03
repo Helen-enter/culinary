@@ -1,32 +1,59 @@
-<div [formGroup]="caloriesForm">
-  <!--  <p>Ваш вес:</p><input pInputText formControlName="weight" type="number" #myInput [(ngModel)]="weight" (input)="onInputChanged()"/>-->
-  <p>Ваш вес:</p><input pInputText formControlName="weight" type="number" [(ngModel)]="weight">
-  <p>Ваш рост:</p><input pInputText formControlName="height" type="number" [(ngModel)]="height"/>
-  <p>Ваш возраст:</p><input pInputText formControlName="age" type="number" [(ngModel)]="age"/>
-  <p>Какой образ жизни вы ведете:</p>
-  <select class="form-select" formControlName="categoryLife" aria-label="Default select example">
-    <option selected disabled>Выберите категорию</option>
-    <option [value]="item" *ngFor="let item of selectLifeStyle; let i = index">{{item}}</option>
-  </select>
+<div class="calories-buttons">
   <div>
-    <p>Ваша цель:</p>
-    <select class="form-select" formControlName="categoryObjective" aria-label="Default select example">
-      <option selected disabled>Выберите категорию</option>
-      <option [value]="item" *ngFor="let item of selectObjective; let i = index">{{item}}</option>
-    </select>
+    <h6>Моя норма КБЖУ</h6>
+    <button (click)="showMyCalories()" class="btn btn-outline-warning">
+      {{!isShowMyCalories ? 'Показать' : 'Скрыть'}}</button>
+  </div>
+  <div>
+    <h6>Рассчитать норму КБЖУ</h6>
+    <button (click)="showCaloriesForm()" class="btn btn-outline-warning">
+      {{!isShowCaloriesForm ? '+' : '-'}}</button>
+  </div>
+</div>
+
+<div *ngIf="isShowMyCalories">
+  <p>Моя норма калорий: </p>
+</div>
+
+<div *ngIf="isShowCaloriesForm">
+  <div [formGroup]="caloriesForm">
+    <!--  <p>Ваш вес:</p><input pInputText formControlName="weight" type="number" #myInput [(ngModel)]="weight" (input)="onInputChanged()"/>-->
+    <div class="d-flex mt-3 form-recipe__el">
+      <span>Ваш вес:</span><input pInputText formControlName="weight" type="number" [(ngModel)]="weight">
+    </div>
+    <div class="d-flex mt-3 form-recipe__el">
+      <span>Ваш рост:</span><input pInputText formControlName="height" type="number" [(ngModel)]="height"/>
+    </div>
+    <div class="d-flex mt-3 form-recipe__el">
+      <span>Ваш возраст:</span><input pInputText formControlName="age" type="number" [(ngModel)]="age"/>
+    </div>
+    <div class="d-flex mt-3 form-recipe__el">
+      <span>Какой образ жизни вы ведете:</span>
+      <select class="form-select form-select__el" formControlName="categoryLife" aria-label="Default select example">
+        <option selected disabled>Выберите категорию</option>
+        <option [value]="item" *ngFor="let item of selectLifeStyle; let i = index">{{item}}</option>
+      </select>
+    </div>
+    <div class="d-flex mt-3 form-recipe__el">
+      <span>Ваша цель:</span>
+      <select class="form-select form-select__el" formControlName="categoryObjective" aria-label="Default select example">
+        <option selected disabled>Выберите категорию</option>
+        <option [value]="item" *ngFor="let item of selectObjective; let i = index">{{item}}</option>
+      </select>
+    </div>
 
   </div>
 
+  <button class="btn btn-outline-warning mt-3" type="submit" (click)="countCalories()" [disabled]="!caloriesForm.valid">
+    Рассчитать
+  </button>
+  <div *ngIf="isShow">
+    <p>Ваша норма</p>
+    <p>{{normCalories}} калорий</p>
+    <p>ваша норма белков: {{proteins}}</p>
+    <p>ваша норма жиров: {{fats}}</p>
+    <p>ваша норма углеводов: {{carbohydrates}}</p>
+    <button class="btn btn-outline-warning">Сохранить результат</button>
+  </div>
 </div>
 
-<button class="btn btn-outline-warning" type="submit" (click)="countCalories()" [disabled]="!caloriesForm.valid">
-  Рассчитать
-</button>
-<div *ngIf="isShow">
-  <p>Ваша норма</p>
-  <p>{{normCalories}} калорий</p>
-  <p>ваша норма белков: {{proteins}}</p>
-  <p>ваша норма жиров: {{fats}}</p>
-  <p>ваша норма углеводов: {{carbohydrates}}</p>
-  <button class="btn btn-outline-warning">Сохранить результат</button>
-</div>

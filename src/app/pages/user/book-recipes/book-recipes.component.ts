@@ -3,6 +3,10 @@ import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../../services/user/user.service";
 import {IRecipe} from "../../../models/recipe";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {RecipeService} from "../../../services/recipe/recipe.service";
+import {IUser} from "../../../models/user";
+import {ActivatedRoute} from "@angular/router";
+import {MessageService} from "primeng/api";
 
 
 @Component({
@@ -34,8 +38,12 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
 
   fileName: string
 
+  isUpdateRecipe = false
+
   constructor(private http: HttpClient,
-              private userService: UserService) {
+              private userService: UserService,
+              public recipeService: RecipeService,
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -65,6 +73,7 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
 
     this.http.post<IRecipe>('http://localhost:3000/recipes/', formParams, {headers: {}}).subscribe((data) => {
     })
+    this.messageService.add({severity: 'success', summary: "Вы добавили рецепт в кулинарную книгу!"})
   }
 
   onSubmit() {
@@ -88,6 +97,7 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
 
   showRecipes() {
     this.recipes = []
+
     this.http.get<IRecipe[]>('http://localhost:3000/recipes').subscribe((data) => {
       console.log('data users', data)
       const userId = this.userService.getUser().id
@@ -134,6 +144,7 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
       this.http.post<IRecipe>(`http://localhost:3000/general-recipes/`, item).subscribe((data) => {
       })
     })
+    this.messageService.add({severity: 'success', summary: "Вы поделились рецептом!"})
   }
 
   removeRecipe(recipeId: string) {
@@ -146,7 +157,18 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
 
   }
 
-  updateRecipe(recipe: IRecipe) {
-    console.log('вы хотите изменить рецепт:', recipe)
+  updateRecipe(ev: Event, recipe: IRecipe) {
+    this.recipeService.updateRecipe(ev, recipe)
+
+  }
+
+  readRecipe(recipe: IRecipe) {
+
+    this.recipeService.setShowModal(true)
+    this.recipeService.getShowModal()
+    this.recipeService.setRecipe(recipe)
+
+    this.recipeService.setDescription(true)
+    // this.recipeService.getDescription()
   }
 }

@@ -18,7 +18,7 @@
     <div *ngIf="isShowRecipes">
       <p>У вас в книге {{recipes.length}} рецепт(a/ов)</p>
       <p>Ваши рецепты:</p>
-      <div class="d-flex">
+      <div class="d-flex flex-wrap">
         <div *ngFor="let recipe of recipes">
 
           <div class="card recipes__card " style="width: 20rem;">
@@ -27,29 +27,35 @@
               <button class="btn-outline-warning btn close_button" (click)="removeRecipe(recipe._id)">x</button>
               <h5 class="card-title">{{recipe.title}}</h5>
             </div>
-            <img src="http://localhost:3000/public/{{recipe.img}}" class="card-img-top" alt="...">
-            <div class="d-flex justify-content-between p-lg-2">
+            <img src="http://localhost:3000/public/{{recipe.img}}" class="card-img-top card-image" alt="...">
+            <div class="d-flex justify-content-between p-lg-2 mt-3">
               <div>
                 <button class="btn-outline-warning btn"
-                        (click)="isReadRecipe = !isReadRecipe">{{isReadRecipe ? 'Скрыть рецепт' : 'Показать рецепт'}}</button>
-                <div *ngIf="isReadRecipe">
-                  <p>{{recipe.description}}</p>
-                  <button class="btn-outline-warning btn" (click)="updateRecipe(recipe)">Изменить рецепт</button>
-                </div>
-              </div>
-              <div>
-                <button class="btn" [disabled]="isShareRecipe"
-                        (click)="shareRecipe(recipe)">
-                  <img src="assets/img/free-icon-font-share-square-9841254.png">
+                        (click)="readRecipe(recipe)">Читать рецепт
                 </button>
+                </div>
+              <div class="d-flex">
+                <div>
+                  <button class="btn icon-btn" (click)="updateRecipe( $event, recipe)">
+                    <img src="assets/img/free-icon-pencils-2830022.png"></button>
+                </div>
+                <div>
+                  <button class="btn icon-btn" [disabled]="isShareRecipe"
+                          (click)="shareRecipe(recipe)">
+                    <img src="assets/img/free-icon-font-share-square-9841254.png">
+                  </button>
+                </div>
+                </div>
+
               </div>
+
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<!--</div>-->
 
 
 <div class="book-recipes__block">
@@ -98,4 +104,6 @@
     </div>
   </div>
 </div>
+
+<p-toast></p-toast>
 

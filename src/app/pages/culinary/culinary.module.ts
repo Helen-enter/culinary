@@ -13,6 +13,7 @@ import { CulinaryModalComponent } from './culinary-modal/culinary-modal.componen
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 @NgModule({
   declarations: [
@@ -23,17 +24,19 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-b
     RegistrationComponent,
     CulinaryModalComponent,
   ],
-  exports: [
-    HeaderComponent
-  ],
-  imports: [
-    CommonModule,
-    CulinaryRoutingModule,
-    FormsModule,
-    InputTextModule,
-    TabViewModule,
-    ToastModule,
-  ],
+    exports: [
+        HeaderComponent,
+        CulinaryModalComponent
+    ],
+    imports: [
+        CommonModule,
+        CulinaryRoutingModule,
+        FormsModule,
+        InputTextModule,
+        TabViewModule,
+        ToastModule,
+        InputTextareaModule,
+    ],
   providers: [
     MessageService
   ]

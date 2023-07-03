@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {IRecipe} from "../../models/recipe";
 import {RecipeService} from "../../services/recipe/recipe.service";
 import {UserService} from "../../services/user/user.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-culinary',
@@ -15,12 +16,16 @@ export class CulinaryComponent implements OnInit {
 
   isShowModal = false
 
+
   constructor(private http: HttpClient,
-              private recipeService: RecipeService,
-              private userService: UserService) {
+              public recipeService: RecipeService,
+              private userService: UserService,
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
+    this.recipeService.setShowImg(true)
+    this.recipeService.getShowImg()
 
     this.recipeService.culinaryUpdateSubject$.subscribe((data) => {
       this.generalRecipes = data
@@ -28,7 +33,7 @@ export class CulinaryComponent implements OnInit {
     this.showAllRecipes()
   }
 
-  swowRecipesCategory(category: string) {
+  showRecipesCategory(category: string) {
     this.http.get<IRecipe[]>(`http://localhost:3000/general-recipes/category/${category}`).subscribe((data) => {
       this.generalRecipes = data
     })
@@ -40,8 +45,12 @@ export class CulinaryComponent implements OnInit {
     })
   }
 
-  readRecipe() {
-    this.isShowModal = true
+  readRecipe(item: IRecipe) {
+    // this.isShowModal = true
+    this.recipeService.setShowModal(this.isShowModal = true)
+    this.recipeService.getShowModal()
+
+    this.recipeService.setRecipe(item)
   }
 
   saveRecipe(recipeId: string) {
@@ -67,8 +76,7 @@ export class CulinaryComponent implements OnInit {
         })
       }
     })
-
-
+    this.messageService.add({severity: 'success', summary: "Вы сохранили рецепт в кулинарную книгу!"})
 
   }
 

@@ -31,10 +31,6 @@ export class AuthorizationComponent {
     this.authTextButton = 'Авторизоваться'
   }
 
-  ngOnDestroy(): void {
-    console.log('destroy')
-  }
-
   onAuth(ev: Event): void {
     const authUser: IUser = {
       psw: this.psw,
@@ -64,6 +60,10 @@ export class AuthorizationComponent {
       this.messageService.add({severity: 'warn', summary: "Ошибка"});
     });
 
+  }
+
+  ngOnDestroy(): void {
+    console.log('destroy')
   }
 
 }

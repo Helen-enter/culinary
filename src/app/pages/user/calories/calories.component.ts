@@ -21,6 +21,9 @@ export class CaloriesComponent implements OnInit, AfterViewInit {
   fats: number | string
   carbohydrates: string | number | bigint | any
 
+  isShowCaloriesForm: boolean = false
+  isShowMyCalories: boolean = false
+
 
   selectLifeStyle = [
     'Сидячий образ жизни (офисная работа)',
@@ -165,5 +168,14 @@ export class CaloriesComponent implements OnInit, AfterViewInit {
   //   }
   // }
 
+  showCaloriesForm() {
+    this.isShowCaloriesForm = !this.isShowCaloriesForm
+    this.isShowMyCalories = false
+  }
+
+  showMyCalories() {
+    this.isShowMyCalories = !this.isShowMyCalories
+    this.isShowCaloriesForm = false
+  }
 
 }

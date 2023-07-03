@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {RecipeService} from "../../services/recipe/recipe.service";
+import {HttpClient} from "@angular/common/http";
+import {IUser} from "../../models/user";
 
 @Component({
   selector: 'app-user',
@@ -10,17 +13,55 @@ import {ActivatedRoute} from "@angular/router";
 export class UserComponent implements OnInit {
   userName: string
 
+  dataUser: IUser
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              public recipeService: RecipeService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.userName = this.userService.getUser().login
-    console.log('userName', this.userName)
+    const name = this.userService.getUser().login
+    console.log('naaaaaame', name)
+    this.userName = name
+
+
+    //params
+
+    // const hasId = this.route.snapshot.paramMap.has('id')
+    // const routeIdParam = this.route.snapshot.paramMap.get(`id`)
+    // console.log(routeIdParam, hasId, 'paramValueId')
+
+    // this.userName = this.userService.getUser().login
+
+    // if (routeIdParam !== 'undefined') {
+    //
+    //   console.log(routeIdParam, hasId, 'bjhrggggggggg')
+    //   this.http.get<IUser>(`http://localhost:3000/users/${routeIdParam}`).subscribe((data) => {
+    //     if(data) {
+    //       const user: IUser = {
+    //         psw: data.psw,
+    //         login: data.login,
+    //         //@ts-ignore
+    //         id: routeIdParam
+    //       }
+    //       console.log(data, 'useeeeeeeeeer')
+    //       this.dataUser = user
+    //       this.userService.setUser(this.dataUser)
+    //       this.userName = this.userService.getUser().login
+    //     }
+    //   })
+    // } else {
+    //   this.userName = this.userService.getUser().login
+    //   console.log('this.userName', this.userName)
+    // }
+
 
   }
 
-  goOut(){
+  goOut() {
     this.userService.getUser().login = ''
   }
 }

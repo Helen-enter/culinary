@@ -36,7 +36,8 @@ export class HeaderComponent implements OnInit {
   initSearchRecipes() {
 
     if (this.searchValue) {
-
+      this.recipeService.setShowImg(false)
+      this.recipeService.getShowImg()
       this.http.get<IRecipe[]>('http://localhost:3000/general-recipes/' + this.searchValue).subscribe((data) => {
         this.generalRecipes = data
         this.recipeService.updateCulinary(data)
@@ -47,6 +48,8 @@ export class HeaderComponent implements OnInit {
       })
 
     } else {
+      this.recipeService.setShowImg(true)
+      this.recipeService.getShowImg()
       this.http.get<IRecipe[]>('http://localhost:3000/general-recipes/').subscribe((data) => {
         this.recipeService.updateCulinary(data)
         console.log(data, 'general-recipes')

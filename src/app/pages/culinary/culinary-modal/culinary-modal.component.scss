@@ -1,0 +1,52 @@
+.modal_culinary {
+  background-color: black;
+  opacity: 0.5;
+  position: fixed;
+  z-index: 3;
+  right: 0;
+  left: 0;
+  bottom: 0;
+
+}
+
+.modal_culinary__el {
+  width: 700px;
+  border-radius: 10px;
+  position: fixed;
+  margin-top: 16px;
+  background-color: #fff2eb;
+  padding: 6px;
+  z-index: 4;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.textarea-modal {
+  margin: 0 2.6rem;
+  width: 87%;
+}
+
+.modal-title {
+  text-align: center;
+  margin-top: 1rem;
+  color: #9b9b9b;
+}
+
+.modal-close {
+  position: absolute;
+  right: 1rem;
+}
+
+.modal-img {
+  width: 100%;
+  padding: 2.8rem;
+}
+
+.modal-description {
+  padding: 0 2.8rem;
+  font-size: 15px;
+
+}

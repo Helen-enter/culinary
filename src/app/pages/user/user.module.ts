@@ -11,6 +11,8 @@ import {InputTextModule} from "primeng/inputtext";
 import {CheckboxModule} from "primeng/checkbox";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {MultiSelectModule} from "primeng/multiselect";
+import {CulinaryModule} from "../culinary/culinary.module";
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
@@ -19,18 +21,20 @@ import {MultiSelectModule} from "primeng/multiselect";
     CaloriesComponent,
     BookRecipesComponent,
   ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    HttpClientModule,
-    TabViewModule,
-    FormsModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    CheckboxModule,
-    InputTextareaModule,
-    MultiSelectModule
-  ],
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        HttpClientModule,
+        TabViewModule,
+        FormsModule,
+        ReactiveFormsModule,
+        InputTextModule,
+        CheckboxModule,
+        InputTextareaModule,
+        MultiSelectModule,
+        CulinaryModule,
+        ToastModule
+    ],
   exports: [
     UserComponent
   ]

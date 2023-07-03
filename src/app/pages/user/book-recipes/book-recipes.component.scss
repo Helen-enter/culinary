@@ -41,7 +41,7 @@ span {
   cursor: pointer;
   border: 1px solid #ccc;
   padding: 6px 12px;
-  width: 250px;
+  width: 500px;
   border-radius: 5px;
 }
 
@@ -60,5 +60,17 @@ span {
 }
 
 .form-recipe__el {
-  width: 250px;
+  width: 500px;
+}
+
+.card-image {
+  height: 250px;
+}
+
+.icon-btn img {
+  width: 20px;
+}
+
+.icon-btn {
+  padding: 0 5px;
 }
