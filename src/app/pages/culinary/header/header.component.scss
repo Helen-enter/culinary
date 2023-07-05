@@ -3,54 +3,29 @@
   src: url("../../../../assets/fonts/Comic_CAT.ttf");
 }
 
-.logo {
-  font-family: Comic;
-  font-size: 30px;
-  color: #ff7e00;
-
-}
-
-.img__logo {
- width: 15px;
-}
-
-.nav_header {
-  width: 100%;
-  //position: absolute;
-  height: 60px;
-  background-color: #9f9384;
-  //opacity: 0.5;
-  //z-index: 2;
-}
-
-.nav_auth {
-  padding: 10px;
-}
-
 .container_nav {
   width: 1190px;
+
+  .logo {
+    font-family: Comic;
+    font-size: 30px;
+    color: #ff7e00;
+
+  }
+
+  .nav_auth {
+    padding: 10px;
+  }
+
+  .user {
+    width: 50px;
+
+  }
+
+  b {
+    padding: 5px;
+    font-size: 20px;
+    color: #ff7e00;
+    font-family: Comic;
+  }
 }
-
-.img__logo {
-  width: 200px;
-}
-
-.login__img {
-  border-radius: 20px;
-  padding: 8px;
-  background-color: #ffce89;
-  color: #fff2eb;
-}
-
-.user {
-  width: 50px;
-}
-
-b {
-  padding: 5px;
-  font-size: 20px;
-  color: #ff7e00;
-  font-family: Comic;
-}
-
-

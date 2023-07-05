@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
 import {RecipeService} from "../../services/recipe/recipe.service";
-import {HttpClient} from "@angular/common/http";
 import {IUser} from "../../models/user";
 
 @Component({
@@ -16,16 +14,11 @@ export class UserComponent implements OnInit {
   dataUser: IUser
 
   constructor(private userService: UserService,
-              public recipeService: RecipeService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private http: HttpClient) {
+              public recipeService: RecipeService) {
   }
 
   ngOnInit() {
-    const name = this.userService.getUser().login
-    console.log('naaaaaame', name)
-    this.userName = name
+    this.userName = this.userService.getUser().login
 
 
     //params
@@ -62,7 +55,13 @@ export class UserComponent implements OnInit {
   }
 
   goOut() {
-    this.userService.getUser().login = ''
+    this.userService.setUser({
+      id: '',
+      psw: '',
+      login: ''
+    })
+
+    this.userService.getUser()
   }
 }
 

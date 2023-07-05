@@ -70,7 +70,7 @@ export class RecipeService {
     return this.isShowDescription
   }
 
-  updateRecipe(ev: Event, recipe: IRecipe) {
+  updateRecipe(recipe: IRecipe) {
     this.setShowModal(true)
     this.getShowModal()
     this.setRecipe(recipe)
@@ -79,36 +79,13 @@ export class RecipeService {
     this.setDescription(false)
     this.getDescription()
 
-//@ts-ignore
-    const description = ev.target.value
-
-    const recipeObj: IRecipe = {
-      title: recipe.title,
-      description: description,
-      category: recipe.category,
-      // id: string
-      recipeId: recipe.recipeId,
-      userId: recipe.userId,
-      img: recipe.img,
-      _id: recipe._id
-    }
-
-    this.descriptionRecipe = recipeObj
-
-    // console.log(description, 'ev.target')
-
-    // this.setDescription(this.isUpdateRecipe === true)
     console.log('вы хотите изменить рецепт:', recipe)
   }
 
   sendNewRecipe(recipe: IRecipe) {
-    // const userId = this.userService.getUser().id
-    // console.log(userId, 'userId')
 
-    const newRecipe = this.descriptionRecipe
-
-    console.log(newRecipe, recipe._id, 'отправить рецепт')
-    this.http.put<IRecipe>(`http://localhost:3000/recipes/${recipe._id}`, newRecipe, {headers: {}}).subscribe((data) => {
+    console.log(recipe, recipe._id, 'отправить рецепт')
+    this.http.put<IRecipe>(`http://localhost:3000/recipes/${recipe._id}`, recipe, {headers: {}}).subscribe((data) => {
 
     })
 

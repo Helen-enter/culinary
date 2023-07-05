@@ -3,69 +3,70 @@
   src: url("../../../assets/fonts/Comic_CAT.ttf");
 }
 
+.culinary-page {
+  .culinary_img {
+    img {
+      width: 100%;
+      z-index: -2;
+      position: relative;
+    }
+  }
 
-.culinary_img img {
-  width: 100%;
-  z-index: -2;
-  position: relative;
-}
+  .main_text {
+    position: absolute;
+    top: 15rem;
+    left: 12rem;
 
-.dish_link {
-  list-style: none;
-  padding: 8px 15px;
-  border-radius: 20px;
-  display: inline;
-  margin: 10px;
-  cursor: pointer;
-  font-family: Comic;
-}
+    p {
+      font-size: 40px;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 4px;
+      font-family: Comic;
+    }
 
-.dishes_nav {
-  margin-top: 2rem;
-}
+    //button {
+    //  border: none;
+    //  padding: 8px 15px;
+    //  background-color: antiquewhite;
+    //  border-radius: 20px;
+    //  cursor: pointer;
+    //}
+  }
 
+  .main_container {
+    width: 1190px;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
 
-.main_container {
-  width: 1190px;
-  margin: 0 auto;
-  right: 0;
-  left: 0;
-}
+    .dishes_nav {
+      margin-top: 2rem;
 
-.main_text {
-  position: absolute;
+      .dish_link {
+        list-style: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        display: inline;
+        margin: 10px;
+        cursor: pointer;
+        font-family: Comic;
+      }
+    }
 
-  top: 15rem;
-  left: 12rem
-}
+    .general-recipes__block {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
 
-.main_text p {
-  font-size: 40px;
-  color: white;
-  font-weight: bold;
-  letter-spacing: 4px;
-  font-family: Comic;
-}
+      .general-recipes__card {
+        width: 30%;
+        padding: 10px;
 
-.main_text button {
-  border: none;
-  padding: 8px 15px;
-  background-color: antiquewhite;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.general-recipes__block {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.general-recipes__card {
-  width: 30%;
-  padding: 10px;
-}
-
-.card-image {
-  height: 250px;
+        .card-image {
+          height: 250px;
+        }
+      }
+    }
+  }
 }

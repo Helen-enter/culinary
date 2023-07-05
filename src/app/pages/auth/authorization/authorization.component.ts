@@ -22,8 +22,7 @@ export class AuthorizationComponent {
     private messageService: MessageService,
     private router: Router,
     private userService: UserService,
-    private http: HttpClient,
-    private userRestService: UserRestService) {
+    private http: HttpClient) {
 
   }
 
@@ -57,7 +56,7 @@ export class AuthorizationComponent {
     }, (err: HttpErrorResponse) => {
       // const serverError = err.error
       // this.messageService.add({severity: 'warn', summary: serverError.errorText});
-      this.messageService.add({severity: 'warn', summary: "Ошибка"});
+      this.messageService.add({severity: 'error', summary: "Ошибка"});
     });
 
   }

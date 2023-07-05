@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {IRecipe} from "../../../models/recipe";
 import {RecipeService} from "../../../services/recipe/recipe.service";
 import {Router} from "@angular/router";
+import {RecipeRestService} from "../../../services/rest/recipe-rest.service";
 
 @Component({
   selector: 'app-header',
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
   constructor(private userService: UserService,
               private http: HttpClient,
               private recipeService: RecipeService,
+              private recipeRestService: RecipeRestService,
               private router: Router) {
   }
 
@@ -41,26 +43,19 @@ export class HeaderComponent implements OnInit {
       this.http.get<IRecipe[]>('http://localhost:3000/general-recipes/' + this.searchValue).subscribe((data) => {
         this.generalRecipes = data
         this.recipeService.updateCulinary(data)
-
-        console.log('nameRecipe', this.searchValue)
-        console.log('nameRecipe', data)
-
       })
 
     } else {
       this.recipeService.setShowImg(true)
       this.recipeService.getShowImg()
-      this.http.get<IRecipe[]>('http://localhost:3000/general-recipes/').subscribe((data) => {
+      this.recipeRestService.getGeneralRecipes().subscribe((data) => {
         this.recipeService.updateCulinary(data)
-        console.log(data, 'general-recipes')
-
       })
     }
   }
 
   clickLogo() {
     const userId = this.userService.getUser().id
-    console.log('ussssssssssss', userId)
     this.router.navigate([`user/${userId}`])
   }
 }

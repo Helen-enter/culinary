@@ -1,16 +1,25 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../services/user/user.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {IUser} from "../../../models/user";
+import {UserRestService} from "../../../services/rest/user-rest.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-calories',
   templateUrl: './calories.component.html',
   styleUrls: ['./calories.component.scss']
 })
-export class CaloriesComponent implements OnInit, AfterViewInit {
+export class CaloriesComponent implements OnInit {
   weight: number
   height: number
   age: number
+
+  man: string = 'man'
+  woman: string = 'woman'
+  gender: string = 'man' || 'woman'
+
+  count: number
 
   categoryLife: string
   categoryObjective: string
@@ -18,11 +27,13 @@ export class CaloriesComponent implements OnInit, AfterViewInit {
   caloriesForm: FormGroup
 
   proteins: string
-  fats: number | string
-  carbohydrates: string | number | bigint | any
+  fats: string
+  carbohydrates: string
 
   isShowCaloriesForm: boolean = false
   isShowMyCalories: boolean = false
+
+  dataUser: IUser
 
 
   selectLifeStyle = [
@@ -34,7 +45,7 @@ export class CaloriesComponent implements OnInit, AfterViewInit {
 
   selectObjective = [
     'Хочу похудеть',
-    'Не хочу ничего менять',
+    'Хочу поддерживать вес',
     'Хочу набрать массу'
   ]
 
@@ -48,7 +59,9 @@ export class CaloriesComponent implements OnInit, AfterViewInit {
 
   isShow = false
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private userRestService: UserRestService,
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -63,8 +76,11 @@ export class CaloriesComponent implements OnInit, AfterViewInit {
     })
   }
 
-  ngAfterViewInit() {
-    // this.myInput.nativeElement.min = this.minValue;
+
+  chooseGender(gender: string) {
+    console.log('gender', gender)
+    this.gender = gender
+    return gender
   }
 
   countCalories() {
@@ -76,9 +92,19 @@ export class CaloriesComponent implements OnInit, AfterViewInit {
     console.log('form params', caloriesDataRow.age)
     console.log('калории считаются')
 
+    console.log('пол: ', this.gender)
 
     //базовый обмен
-    const count = 655.1 + (9.563 * caloriesDataRow.weight) + (1.85 * caloriesDataRow.height) - (4.676 * caloriesDataRow.age)
+    //66.5 + (13.75 × вес в кг) + (5.003 × рост в см) - (6.775 × возраст в годах)  - для мужчин
+    // 655.1 + (9.563 × вес в кг) + (1.85 × рост в см) - (4.676 × возраст в годах)  - для женщин
+
+
+    if (this.gender === 'man') {
+      this.count = 66.5 + (13.75 * caloriesDataRow.weight) + (5.003 * caloriesDataRow.height) - (6.775 * caloriesDataRow.age)
+    } else if (this.gender === 'woman') {
+      this.count = 655.1 + (9.563 * caloriesDataRow.weight) + (1.85 * caloriesDataRow.height) - (4.676 * caloriesDataRow.age)
+    }
+
 
     if (caloriesDataRow.categoryLife === 'Сидячий образ жизни (офисная работа)') {
       this.categoryLifeCount = 1.2
@@ -91,7 +117,7 @@ export class CaloriesComponent implements OnInit, AfterViewInit {
     }
 
 
-    const normCalories = count * this.categoryLifeCount
+    const normCalories = this.count * this.categoryLifeCount
     if (caloriesDataRow.categoryObjective === 'Не хочу ничего менять') {
       //обмен с учетом ораза жизни
       const myNormCalories = normCalories.toFixed(0)
@@ -151,8 +177,8 @@ export class CaloriesComponent implements OnInit, AfterViewInit {
     }
 
 
-    console.log('цель', this.normCalories)
-    console.log('бо', count)
+    // console.log('цель', this.normCalories)
+    // console.log('бо', count)
 
     this.isShow = true
   }
@@ -162,12 +188,6 @@ export class CaloriesComponent implements OnInit, AfterViewInit {
     return carbohydrates
   }
 
-  // onInputChanged() {
-  //   if (this.myInput.nativeElement.value < this.minValue) {
-  //     this.myInput.nativeElement.value = this.minValue;
-  //   }
-  // }
-
   showCaloriesForm() {
     this.isShowCaloriesForm = !this.isShowCaloriesForm
     this.isShowMyCalories = false
@@ -176,6 +196,38 @@ export class CaloriesComponent implements OnInit, AfterViewInit {
   showMyCalories() {
     this.isShowMyCalories = !this.isShowMyCalories
     this.isShowCaloriesForm = false
+
+
+    const userId = this.userService.getUser().id
+
+    this.userRestService.getUserById(userId).subscribe((data) => {
+      this.dataUser = data
+      console.log('dataUser', this.dataUser)
+    })
+
+
+  }
+
+  saveCalories(normCalories: string, proteins: string, fats: string, carbohydrates: string) {
+    const userId = this.userService.getUser().id
+
+    const userObj: IUser = {
+      login: this.userService.getUser().login,
+      psw: this.userService.getUser().psw,
+      email: this.userService.getUser().email,
+      id: userId,
+
+      calories: normCalories,
+      proteins: proteins,
+      fats: fats,
+      carbohydrates: carbohydrates
+    }
+
+    console.log('your user: ', userObj)
+    this.userRestService.updateUser(userId, userObj).subscribe((data) => {
+    })
+    this.messageService.add({severity: 'success', summary: 'Вы сохранили результат!'})
+
   }
 
 }

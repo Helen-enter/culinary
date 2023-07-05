@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { IUser } from 'src/app/models/user';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import { MessageService } from 'primeng/api';
+import {UserRestService} from "../../../services/rest/user-rest.service";
 
 
 @Component({
@@ -18,12 +19,12 @@ export class RegistrationComponent {
 
   constructor(
     private messageService: MessageService,
-    private http: HttpClient
+    private userRestService: UserRestService
   ) { }
 
   registration(ev: Event): boolean | void {
     if (this.psw !== this.pswRepeat) {
-      this.messageService.add({severity: 'error', summary: 'Password mismatch'});
+      this.messageService.add({severity: 'error', summary: 'Пароли не совпадают'});
       return false
     }
 
@@ -33,7 +34,7 @@ export class RegistrationComponent {
       email: this.email,
     }
 
-    this.http.post<IUser>('http://localhost:3000/users/', userObj).subscribe((data) => {
+    this.userRestService.addUser(userObj).subscribe((data) => {
       if (this.saveUserInStore) {
         const objUserJsonStr = JSON.stringify(userObj);
         window.localStorage.setItem('user_' + userObj.login, objUserJsonStr);

@@ -10,10 +10,10 @@
 }
 
 .modal_culinary__el {
+  margin-top: 16px;
   width: 700px;
   border-radius: 10px;
   position: fixed;
-  margin-top: 16px;
   background-color: #fff2eb;
   padding: 6px;
   z-index: 4;
@@ -22,31 +22,49 @@
   right: 0;
   height: 500px;
   overflow-y: scroll;
+
+  .modal-close {
+    position: absolute;
+    right: 1rem;
+    margin: 0 2.6rem;
+  }
+
+  .modal-title {
+    text-align: center;
+    margin-top: 1rem;
+    color: #9b9b9b;
+  }
+
+  .modal-img {
+    width: 100%;
+    padding: 2.8rem;
+  }
+
+  .textarea-modal {
+    margin: 0 2.6rem;
+    width: 87%;
+  }
+
+  .modal-description {
+    padding: 0 2.8rem;
+    font-size: 15px;
+  }
+
+  span {
+    font-size: 18px;
+    color: #414141;
+    margin-top: 2rem;
+  }
 }
 
-.textarea-modal {
-  margin: 0 2.6rem;
-  width: 87%;
+::-webkit-scrollbar {
+  width: 7px;
+  background-color: #dedede;
+  border-radius: 25px;
 }
 
-.modal-title {
-  text-align: center;
-  margin-top: 1rem;
-  color: #9b9b9b;
+::-webkit-scrollbar-thumb {
+  background-color: #ce7b25;
+  border-radius: 9em;
 }
 
-.modal-close {
-  position: absolute;
-  right: 1rem;
-}
-
-.modal-img {
-  width: 100%;
-  padding: 2.8rem;
-}
-
-.modal-description {
-  padding: 0 2.8rem;
-  font-size: 15px;
-
-}

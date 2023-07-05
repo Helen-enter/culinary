@@ -14,6 +14,9 @@ export class CulinaryModalComponent implements OnInit {
 
   changeRecipeEl = false
 
+  ingredients: string
+  description: string
+
   constructor(public recipeService: RecipeService,
               private messageService: MessageService) {
   }
@@ -23,15 +26,43 @@ export class CulinaryModalComponent implements OnInit {
   }
 
   close() {
+    this.recipeService.setDescription(true)
+
     this.recipeService.setShowModal(false)
     this.recipeService.getShowModal()
   }
 
   changeRecipe(ev: Event, recipe: IRecipe) {
+    const ingredients = this.changeRecipeIngredients(ev, recipe)
+    const description = this.changeRecipeDescription(ev, recipe)
 
-    this.recipeService.updateRecipe(ev, recipe)
-  //@ts-ignore
-    recipe.description = ev.target.value
+    const recipeObj: IRecipe = {
+      title: recipe.title,
+      ingredients: ingredients,
+      description: description,
+      category: recipe.category,
+      // id: string
+      recipeId: recipe.recipeId,
+      userId: recipe.userId,
+      img: recipe.img,
+      _id: recipe._id
+    }
+
+    this.recipeService.updateRecipe(recipeObj)
+
+    console.log('ev.target.value', ingredients, description)
+
+  }
+
+  changeRecipeIngredients(ev: Event, recipe: IRecipe) {
+    //@ts-ignore
+    return recipe.ingredients = ev.target.value
+  }
+
+  changeRecipeDescription(ev: Event, recipe: IRecipe) {
+    //@ts-ignore
+    return recipe.description = ev.target.value
+
   }
 
   sendNewRecipe(recipe: IRecipe) {

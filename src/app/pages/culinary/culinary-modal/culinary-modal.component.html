@@ -5,17 +5,40 @@
 <div class="bg-white  modal_culinary__el">
   <div class="modal-header__el">
     <button (click)="close()" class="btn btn-outline-warning modal-close">x</button>
-    <h4 class="text-center mb-2 text-lg modal-title">{{ recipe.title | titlecase }}</h4>
+    <h4 class="text-center mb-2 text-lg modal-title">{{ recipe.title}}</h4>
   </div>
-  <img class="modal-img" src="http://localhost:3000/public/{{recipe.img}}">
+<!--  <img class="modal-img" src="http://localhost:3000/public/{{recipe.img}}">-->
   <div *ngIf="recipeService.getDescription() === false">
     <div>
-      <textarea pInputTextarea class="textarea-modal" (input)="changeRecipe($event, recipe)">{{recipe.description}}</textarea>
+      <div class="mt-3">
+        <span class="modal-description">Ингридиенты: </span>
+        <textarea pInputTextarea class="textarea-modal" (input)="changeRecipeIngredients($event, recipe)">{{recipe.ingredients}}</textarea>
+      </div>
+      <div class="mt-3">
+        <span class="modal-description">Описание: </span>
+        <textarea pInputTextarea class="textarea-modal" (input)="changeRecipeDescription($event, recipe)">{{recipe.description}}</textarea>
+      </div>
     </div>
-    <button (click)="sendNewRecipe(recipe)" class="btn btn-outline-warning modal-close">Изменить рецепт</button>
+      <button (click)="sendNewRecipe(recipe)" class="btn btn-outline-warning modal-close mt-3">Изменить рецепт</button>
   </div>
-
-  <p class="modal-description" *ngIf="recipeService.getDescription() === true">{{recipe.description}}</p>
+  <div *ngIf="recipeService.getDescription() === true">
+    <div class="modal-description">
+      <span>Ингридиенты: </span>
+      <p >{{recipe.ingredients}}</p>
+    </div>
+    <div class="modal-description">
+      <span>Описание: </span>
+      <p>{{recipe.description}}</p>
+    </div>
+    <img class="modal-img" src="http://localhost:3000/public/{{recipe.img}}">
+<!--    <div class="mt-3">-->
+<!--      <hr>-->
+<!--      <span class="modal-description">Оставить комментарий: </span>-->
+<!--      <textarea pInputTextarea class="textarea-modal mt-3"></textarea>-->
+<!--      <button class="btn btn-outline-warning mt-3">Отправить</button>-->
+<!--    </div>-->
+  </div>
 </div>
+<p-toast></p-toast>
 
 

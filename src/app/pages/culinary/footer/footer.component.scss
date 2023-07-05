@@ -1,11 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
 .footer_wrapper {
   flex: 0 0 auto;
-}
+  height: 80px;
+  background-color: #fff1dc;
 
-.footer_description {
-  width: 1190px;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-}
 
+  .footer_description {
+    width: 1190px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+
+    .footer_title {
+      margin-top: 2rem;
+      padding-top: 1rem;
+    }
+  }
+}

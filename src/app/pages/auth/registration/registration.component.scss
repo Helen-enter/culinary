@@ -3,10 +3,20 @@
   src: url("../../../../assets/fonts/Comic_CAT.ttf");
 }
 
+.container-fluid.container_nav.header_nav {
+  width: 1190px;
+
+  .logo {
+    font-family: Comic;
+    font-size: 30px;
+    color: #ff7e00;
+  }
+}
+
 
 .registaration {
   background: url("../../../../assets/img/auth.jpg");
-  background-size: cover ;
+  background-size: cover;
   //background: #ffcd4f;
   position: absolute;
   width: 100%;
@@ -15,7 +25,6 @@
 }
 
 .registration_page {
-
   width: 400px;
   margin: 0 auto;
   box-shadow: 2px 2px 20px 6px rgb(146 140 132 / 20%);
@@ -25,54 +34,50 @@
   background-color: #ffffff;
   border-radius: 20px;
   margin-top: 2rem;
+
+  span, input {
+    display: block;
+  }
+
+  span {
+    color: gray;
+  }
+
+  h3 {
+    text-align: center;
+    color: #b2b2b2;
+  }
+
+  .auth_el {
+    right: 0;
+    left: 0;
+    width: 210px;
+    margin: 0 auto;
+    margin-top: 1rem;
+  }
+
+  .btn-wrapper {
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    width: 9.5rem;
+
+    .btn_auth {
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: none;
+      background-color: #ffbd7d;
+      color: white;
+      margin: 0 auto;
+      right: 0;
+      left: 0;
+    }
+  }
 }
 
-span, input {
-  display: block;
-}
-
-span {
-  color: gray;
-}
-
-.container-fluid.container_nav.header_nav {
-  width: 1190px;
-}
-
-.logo {
-  font-family: Comic;
-  font-size: 30px;
-  color: #ff7e00;
-}
-
-.registration_page h3 {
-  text-align: center;
-  color: #b2b2b2;
-}
-
-.btn_auth {
-  padding: 8px 15px;
-  border-radius: 20px;
-  border: none;
-  background-color: #ffbd7d;
-  color: white;
-  margin: 0 auto;
-  right: 0;
-  left: 0;
-}
 
 
-.auth_el, {
-  right: 0;
-  left: 0;
-  width: 210px;
-  margin: 0 auto;
-  margin-top: 1rem;
-}
 
-.btn-wrapper {
-  margin: 0 auto;
-  right: 0;
-  left: 0;
-  width: 9.5rem;
-}
+
+
+

@@ -1,12 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../../services/user/user.service";
 import {IRecipe} from "../../../models/recipe";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RecipeService} from "../../../services/recipe/recipe.service";
-import {IUser} from "../../../models/user";
-import {ActivatedRoute} from "@angular/router";
 import {MessageService} from "primeng/api";
+import {RecipeRestService} from "../../../services/rest/recipe-rest.service";
 
 
 @Component({
@@ -18,6 +16,7 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
   recipes: [] | any[] = []
   category: string
   description: string
+  ingredients: string
   title: string
   img?: string
 
@@ -26,7 +25,7 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
   isShowRecipes = false
   isShowAddRecipes = false
   isReadRecipe = false
-  selectedCategory = ['супы', 'салаты', 'выпечка', 'закуски', 'десерты', 'десерты без сахара']
+  selectedCategory = ['супы', 'салаты', 'выпечка', 'закуски', 'десерты', 'десерты без сахара', 'горячее']
 
   dataRecipe: IRecipe
 
@@ -40,10 +39,10 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
 
   isUpdateRecipe = false
 
-  constructor(private http: HttpClient,
-              private userService: UserService,
+  constructor(private userService: UserService,
               public recipeService: RecipeService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private recipeRestService: RecipeRestService) {
   }
 
   ngOnInit() {
@@ -51,6 +50,7 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
     this.recipeForm = new FormGroup({
       category: new FormControl(),
       title: new FormControl('', {validators: Validators.required}),
+      ingredients: new FormControl('', {validators: Validators.required}),
       description: new FormControl('', [Validators.required, Validators.minLength(2)]),
       img: new FormControl('', {validators: Validators.required}),
       userId: new FormControl(this.userService.getUser().id),
@@ -71,16 +71,13 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.http.post<IRecipe>('http://localhost:3000/recipes/', formParams, {headers: {}}).subscribe((data) => {
+    this.recipeRestService.saveRecipe(formParams).subscribe((data) => {
     })
     this.messageService.add({severity: 'success', summary: "Вы добавили рецепт в кулинарную книгу!"})
   }
 
   onSubmit() {
 
-  }
-
-  clickShowRecipes() {
   }
 
   selectFile(ev: any): void {
@@ -98,7 +95,7 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
   showRecipes() {
     this.recipes = []
 
-    this.http.get<IRecipe[]>('http://localhost:3000/recipes').subscribe((data) => {
+    this.recipeRestService.getRecipes().subscribe((data) => {
       console.log('data users', data)
       const userId = this.userService.getUser().id
       data.forEach((el) => {
@@ -125,31 +122,21 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
 
     this.recipeFromComponent = recipe
     const recipeId = recipe._id
-    // const recipeObj: IRecipe = {
-    //   title: recipe.title,
-    //   description: recipe.description,
-    //   category: recipe.category,
-    //   recipeId: recipe._id,
-    //   userId: recipe.userId,
-    //   img: recipe.img,
-    //   _id: recipe._id
-    // }
-    // this.http.put<IRecipe>(`http://localhost:3000/recipes/${recipeId}`, recipeObj).subscribe((data) => {
-    //
-    // })
 
-    this.http.get<IRecipe>(`http://localhost:3000/recipes/${recipeId}`, {headers: {}}).subscribe((item) => {
+    this.recipeRestService.getRecipeById(recipeId).subscribe((item) => {
       console.log('вы хотите поделиться рецептом', item, item.recipeId)
 
-      this.http.post<IRecipe>(`http://localhost:3000/general-recipes/`, item).subscribe((data) => {
+      this.recipeRestService.addGeneralRecipe(item).subscribe((data) => {
       })
     })
     this.messageService.add({severity: 'success', summary: "Вы поделились рецептом!"})
   }
 
-  removeRecipe(recipeId: string) {
+  removeRecipe(recipe: IRecipe) {
 
-    this.http.delete<IRecipe>(`http://localhost:3000/recipes/${recipeId}`).subscribe((data: IRecipe) => {
+    const recipeId = recipe._id
+
+    this.recipeRestService.deleteRecipeById(recipeId).subscribe((data: IRecipe) => {
       console.log('data', data)
     })
 
@@ -157,8 +144,8 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
 
   }
 
-  updateRecipe(ev: Event, recipe: IRecipe) {
-    this.recipeService.updateRecipe(ev, recipe)
+  updateRecipe(recipe: IRecipe) {
+    this.recipeService.updateRecipe(recipe)
 
   }
 
@@ -169,6 +156,5 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
     this.recipeService.setRecipe(recipe)
 
     this.recipeService.setDescription(true)
-    // this.recipeService.getDescription()
   }
 }

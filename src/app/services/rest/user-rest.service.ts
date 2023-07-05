@@ -12,15 +12,15 @@ export class UserRestService {
   constructor(private http: HttpClient) {
   }
 
-  createRecipe(body: IRecipe): Observable<any> {
-    return this.http.post('http://localhost:3000/recipes/', body, {headers: {}})
-  }
-
-  getUsers() {
-    return this.http.get<IUser[]>('http://localhost:3000/users/')
-  }
-
-  getUserById(id: string) {
+  getUserById(id: string | undefined) {
     return this.http.get<IUser>(`http://localhost:3000/users/${id}`)
+  }
+
+  addUser(body: IUser): Observable<IUser> {
+    return this.http.post<IUser>('http://localhost:3000/users/', body)
+  }
+
+  updateUser(userId: string | undefined, data: IUser) {
+    return this.http.put<IUser>(`http://localhost:3000/users/${userId}`, data, {headers: {}})
   }
 }

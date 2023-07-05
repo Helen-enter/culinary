@@ -5,48 +5,46 @@
 
 .header_nav {
   width: 1190px;
+
+  .logo {
+    font-family: Comic;
+    font-size: 30px;
+    color: #ff7e00;
+  }
 }
 
-h3 {
-  text-align: center;
-  color: #b2b2b2;
-}
-
-.user_name {
-  margin-top: 2rem;
-  text-align: center;
-}
 
 .user_page {
   width: 1190px;
   right: 0;
   left: 0;
   margin: 0 auto;
+
+  .user_name {
+    margin-top: 2rem;
+    text-align: center;
+
+    h3 {
+      text-align: center;
+      color: #b2b2b2;
+    }
+
+    p {
+      color: #9b9b9b;
+      font-size: 18px;
+
+      span {
+        font-size: 18px;
+        color: #ff7e00;
+      }
+    }
+  }
+
+  .user_list {
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+  }
+
 }
 
-
-.user_list {
-  right: 0;
-  left: 0;
-  margin: 0 auto;
-}
-
-.tab-panel {
-
-}
-
-.logo {
-  font-family: Comic;
-  font-size: 30px;
-  color: #ff7e00;
-}
-
-.user_name p {
-  color: #9b9b9b;
-  font-size: 18px;
-}
-
-.user_name span {
-  font-size: 18px;
-  color: #ff7e00;
-}

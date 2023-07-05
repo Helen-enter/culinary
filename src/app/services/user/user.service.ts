@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { IUser } from 'src/app/models/user';
+import {Injectable} from '@angular/core';
+import {IUser} from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +9,10 @@ export class UserService {
   private token: string
 
 
-  constructor() { }
+  constructor() {
+  }
 
-  getUser(): IUser {
-    console.log('user', this.user)
+  getUser() {
     return this.user
   };
 
