@@ -12,6 +12,7 @@
 
 </div>
 <div class="user_page">
+  <div class="user_page__el"></div>
   <div class="user_name">
     <h3>Личный кабинет</h3>
     <p>Добро пожаловать: <span>{{userName}}</span> !</p>
@@ -19,13 +20,13 @@
   <div>
     <div class="user_list">
       <p-tabView>
+        <p-tabPanel header="Моя кулинарная книга">
+          <app-book-recipes></app-book-recipes>
+        </p-tabPanel>
         <p-tabPanel header="Моя норма КБЖУ">
           <ng-template pTemplate="content">
             <app-calories></app-calories>
           </ng-template>
-        </p-tabPanel>
-        <p-tabPanel header="Моя кулинарная книга">
-          <app-book-recipes></app-book-recipes>
         </p-tabPanel>
       </p-tabView>
     </div>

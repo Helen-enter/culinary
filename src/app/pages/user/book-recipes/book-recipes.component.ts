@@ -51,7 +51,7 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
       category: new FormControl(),
       title: new FormControl('', {validators: Validators.required}),
       ingredients: new FormControl('', {validators: Validators.required}),
-      description: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(20)]),
       img: new FormControl('', {validators: Validators.required}),
       userId: new FormControl(this.userService.getUser().id),
     })
@@ -70,10 +70,10 @@ export class BookRecipesComponent implements OnInit, OnDestroy {
         formParams.append(prop, recipeDataRow[prop])
       }
     }
-
     this.recipeRestService.saveRecipe(formParams).subscribe((data) => {
     })
     this.messageService.add({severity: 'success', summary: "Вы добавили рецепт в кулинарную книгу!"})
+    this.recipeForm.reset()
   }
 
   onSubmit() {

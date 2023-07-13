@@ -42,6 +42,10 @@
     display: block;
   }
 
+  .input-error {
+    border: 1px solid #ff8989 !important;
+  }
+
   span {
     color: gray;
   }

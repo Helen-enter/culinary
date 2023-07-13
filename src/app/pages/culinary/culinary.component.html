@@ -1,24 +1,21 @@
-
-
 <app-header></app-header>
 <app-culinary-modal *ngIf="recipeService.getShowModal() === true"></app-culinary-modal>
-
 <div class="culinary-page">
-  <div class="culinary_img">
-    <img *ngIf="recipeService.getShowImg() === true" src="assets/img/culinary_img.jpg">
+  <div *ngIf="recipeService.getShowImg() === true">
+    <div class="culinary_img">
+      <img  src="assets/img/culinary_img.jpg">
+    </div>
+    <div class="main_text">
+      <p>Готовим вместе<br>
+        на Кулинар.ru</p>
+    </div>
   </div>
-  <div class="main_text">
-    <p>Готовим вместе<br>
-      на Кулинар.ru</p>
-    <!--    <button>Посмотреть</button>-->
-  </div>
-
-
   <div class="main_container">
     <div class="dishes_nav">
       <ul>
         <button class="btn btn-outline-warning dish_link" (click)="showAllRecipes()"><a>#все</a></button>
-        <button *ngFor="let item of selectedCategory" class="dish_link btn btn-outline-warning" (click)="showRecipesCategory(item)"><a>#{{item}}</a></button>
+        <button *ngFor="let item of selectedCategory" class="dish_link btn btn-outline-warning"
+                (click)="showRecipesCategory(item)"><a>#{{item}}</a></button>
       </ul>
     </div>
 
@@ -30,7 +27,7 @@
             <h5 class="card-title">{{item.title}}</h5>
           </div>
 
-          <img src="http://localhost:3000/public/{{item.img}}" class="card-img-top card-image" alt="...">
+          <img src="http://localhost:3000/public/{{item.img}}" class="card-img-top card-image" alt="food">
           <div class="card-body d-flex justify-content-between">
 
             <button class="btn btn-outline-warning" (click)="readRecipe(item)">Читать рецепт</button>

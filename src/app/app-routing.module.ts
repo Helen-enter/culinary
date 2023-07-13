@@ -21,11 +21,6 @@ const routes: Routes = [
     path: 'user/:id',
     loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)
   },
-  //
-  // {
-  //   path: 'user',
-  //   loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)
-  // },
   {
     path: '**',
     redirectTo: 'culinary'

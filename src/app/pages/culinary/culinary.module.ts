@@ -12,7 +12,6 @@ import {TabViewModule} from "primeng/tabview";
 import { CulinaryModalComponent } from './culinary-modal/culinary-modal.component';
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
-import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {InputTextareaModule} from "primeng/inputtextarea";
 
 @NgModule({

@@ -86,12 +86,6 @@ export class CaloriesComponent implements OnInit {
   countCalories() {
     const caloriesDataRow = this.caloriesForm.getRawValue()
     let formParams = new FormData()
-
-
-    console.log('form params', caloriesDataRow)
-    console.log('form params', caloriesDataRow.age)
-    console.log('калории считаются')
-
     console.log('пол: ', this.gender)
 
     //базовый обмен
@@ -118,8 +112,8 @@ export class CaloriesComponent implements OnInit {
 
 
     const normCalories = this.count * this.categoryLifeCount
-    if (caloriesDataRow.categoryObjective === 'Не хочу ничего менять') {
-      //обмен с учетом ораза жизни
+    if (caloriesDataRow.categoryObjective === 'Хочу поддерживать вес') {
+      //обмен с учетом образа жизни
       const myNormCalories = normCalories.toFixed(0)
       this.normCalories = myNormCalories
 
@@ -223,11 +217,9 @@ export class CaloriesComponent implements OnInit {
       carbohydrates: carbohydrates
     }
 
-    console.log('your user: ', userObj)
     this.userRestService.updateUser(userId, userObj).subscribe((data) => {
     })
     this.messageService.add({severity: 'success', summary: 'Вы сохранили результат!'})
-
   }
 
 }

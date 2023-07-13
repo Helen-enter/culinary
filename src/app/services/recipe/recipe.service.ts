@@ -12,8 +12,8 @@ export class RecipeService {
   readonly culinaryUpdateSubject$ = this.culinaryUpdateSubject
 
 
-  private recipesUpdateSubject = new Subject<IRecipe>()
-  readonly recipesUpdateSubject$ = this.recipesUpdateSubject
+  // private recipesUpdateSubject = new Subject<IRecipe>()
+  // readonly recipesUpdateSubject$ = this.recipesUpdateSubject
 
   recipe: IRecipe
 
@@ -32,10 +32,6 @@ export class RecipeService {
   updateCulinary(data: IRecipe[]) {
     this.culinaryUpdateSubject.next(data)
 
-  }
-
-  updateRecipes(data: IRecipe) {
-    this.recipesUpdateSubject.next(data)
   }
 
   setShowModal(show: boolean) {

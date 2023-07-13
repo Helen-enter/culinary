@@ -3,6 +3,7 @@
   src: url("../../../assets/fonts/Comic_CAT.ttf");
 }
 
+
 .header_nav {
   width: 1190px;
 
@@ -15,18 +16,44 @@
 
 
 .user_page {
+
+
+
   width: 1190px;
   right: 0;
   left: 0;
   margin: 0 auto;
+.user_page__el {
+ // background: url("../../../../src/assets/img/5178119.jpg") no-repeat;
+  background: url("../../../../src/assets/img/50807393.jpg") ;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  //height: 100%;
+  z-index: -3;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  top: 0;
+  //opacity: 0.5;
+  position: absolute;
 
+}
   .user_name {
+    //background-color: #ffffff;
+    border-radius: 5px;
+    padding: 1rem;
     margin-top: 2rem;
     text-align: center;
+    background-color: #fdfaf1;
+    box-shadow: 0px 0px 20px 5px rgb(80 58 34 / 10%);
+
 
     h3 {
       text-align: center;
-      color: #b2b2b2;
+      //color: #b2b2b2;
+      padding-top: 1.5rem;
+      color: #bdbdbd;
     }
 
     p {
@@ -41,6 +68,9 @@
   }
 
   .user_list {
+    box-shadow: 0px 5px 20px 2px rgb(53 80 34 / 15%);
+    background-color: #ffffff;
+    min-height: 350px;
     right: 0;
     left: 0;
     margin: 0 auto;
